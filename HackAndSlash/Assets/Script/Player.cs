@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
 
     private GameObject item = null;
 
+    public KeyCode useItemKey = KeyCode.Q;
+    public KeyCode pickItemKey = KeyCode.E;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -18,30 +21,49 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerMove();
+
+        PlayerAttack();
+    }
+
+    void PlayerMove()
+    {
         // Move direction directly from axes
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), -1.00f, Input.GetAxis("Vertical"));
         moveDirection *= speed;
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
+    }
 
+    void PlayerAttack()
+    {
+        if (Input.GetKey(useItemKey))
+        {
+            //so ataca se tiver segurando item
+            if (item != null)
+            {
+                item.GetComponent<ItensParent>().UseItem();
+            }
+        }
     }
 
     void OnTriggerStay(Collider collider)
     {
         if (collider.tag == "Item")
         {
-            if (item == null)
+            if (Input.GetKey(pickItemKey))
             {
-                if (Input.GetKey(KeyCode.E))
+                if (item == null)
                 {
                     item = collider.gameObject;
-                    item.GetComponent<Lance>().PickItem();
 
                     item.transform.SetParent(this.transform);
-
-                    Vector3 newPosition = new Vector3(0, 0, 1);
-                    item.transform.localPosition = newPosition;
+                    item.GetComponent<ItensParent>().PickItem();
+                }
+                else
+                {
+                    Debug.Log("Ja esta segurando um item");
                 }
             }
         }
