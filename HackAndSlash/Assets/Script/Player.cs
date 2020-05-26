@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -34,6 +35,28 @@ public class Player : MonoBehaviour
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
+
+        PlayerRotation();
+    }
+
+    void PlayerRotation()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.forward);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.left);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.back);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.right);
+        }
     }
 
     void PlayerAttack()
