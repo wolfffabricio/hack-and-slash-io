@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public KeyCode useItemKey = KeyCode.Q;
     public KeyCode pickItemKey = KeyCode.E;
 
+    public GameObject Item { get => item; set => item = value; }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerMove();
+        PlayerRotation();
 
         PlayerAttack();
     }
@@ -35,25 +38,23 @@ public class Player : MonoBehaviour
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
-
-        PlayerRotation();
     }
 
     void PlayerRotation()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetAxis("Vertical") > 0.2f)
         {
             transform.rotation = Quaternion.LookRotation(Vector3.forward);
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetAxis("Horizontal") < -0.2f)
         {
             transform.rotation = Quaternion.LookRotation(Vector3.left);
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetAxis("Vertical") < -0.2f)
         {
             transform.rotation = Quaternion.LookRotation(Vector3.back);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetAxis("Horizontal") > 0.2f)
         {
             transform.rotation = Quaternion.LookRotation(Vector3.right);
         }
@@ -81,12 +82,20 @@ public class Player : MonoBehaviour
                 {
                     item = collider.gameObject;
 
-                    item.transform.SetParent(this.transform);
-                    item.GetComponent<ItensParent>().PickItem();
+                    if (item.GetComponent<ItensParent>().OnGround)
+                    {
+                        item.transform.SetParent(this.transform);
+                        item.GetComponent<ItensParent>().PickItem();
+                    }
+                    else
+                    {
+                        //não pode pegar item que outra pessoa estiver segurando
+                        item = null;
+                    }
                 }
                 else
                 {
-                    Debug.Log("Ja esta segurando um item");
+                    //ja esta segurando um item
                 }
             }
         }
