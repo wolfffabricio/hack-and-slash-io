@@ -7,8 +7,12 @@ public abstract class ItensParent : MonoBehaviour
     protected bool onGround;
     protected bool attacking;
     protected int charges;
+    protected int power;
+
 
     public bool OnGround { get => onGround; set => onGround = value; }
+    public bool Attacking { get => attacking; set => attacking = value; }
+    public int Power { get => power; set => power = value; }
 
     // Start is called before the first frame update
     void Start()

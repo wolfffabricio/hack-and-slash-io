@@ -12,6 +12,7 @@ public class Spear : ItensParent
         charges = 10;
         onGround = true;
         attacking = false;
+        power = 30;
     }
 
     // Update is called once per frame
@@ -33,7 +34,7 @@ public class Spear : ItensParent
                 if (charges == 0)
                 {
                     //TODO destruir item
-                    gameObject.GetComponentInParent<Player>().Item = null;
+                    gameObject.GetComponentInParent<PlayersParent>().Item = null;
                     Destroy(this.gameObject);    
                 }
                 transform.localPosition = new Vector3(0.25f, 0, 0);
