@@ -7,7 +7,7 @@ public abstract class PlayersParent : MonoBehaviour
     protected CharacterController characterController;
     protected Vector3 moveDirection = Vector3.zero;
 
-    protected GameObject item = null;
+    protected GameObject item;
 
     protected float speed = 6.0f;
     protected int health;
@@ -108,7 +108,6 @@ public abstract class PlayersParent : MonoBehaviour
                 health -= collider.gameObject.GetComponent<ItensParent>().Power;
                 CheckIfDied();
             }
-
         }
     }
 
