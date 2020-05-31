@@ -12,6 +12,7 @@ public class Player : PlayersParent
     {
         characterController = GetComponent<CharacterController>();
         health = 100;
+        item = null;
     }
 
     // Update is called once per frame

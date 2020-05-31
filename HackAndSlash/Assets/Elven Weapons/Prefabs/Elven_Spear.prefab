@@ -89,8 +89,8 @@ GameObject:
   m_Component:
   - component: {fileID: 412588}
   - component: {fileID: 9594706}
-  - component: {fileID: -8369463407129363213}
   - component: {fileID: -3895277752743556556}
+  - component: {fileID: 6319490620821848193}
   m_Layer: 0
   m_Name: Elven_Spear
   m_TagString: Item
@@ -132,18 +132,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-8369463407129363213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 145214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72425e9a2ceb5644a27622c27abeaa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &-3895277752743556556
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -158,3 +146,15 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6319490620821848193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7df90f1fbb1bc4a9f3d2af15b45f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

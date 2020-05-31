@@ -5,20 +5,22 @@ using UnityEngine;
 public class Jewellery : MonoBehaviour
 {
     private bool isEquiped;
-    private string name;
-    private string type;
+    private string jewellName;
+    private string jewellType;
     private int powerBonus;
     private int healthBonus;
 
     public Jewellery(string name, string type, int powerBonus, int healthBonus)
     {
-        this.name = name;
-        this.type = type;
+        this.jewellName = name;
+        this.jewellType = type;
         this.powerBonus = powerBonus;
         this.healthBonus = healthBonus;
     }
 
     public bool IsEquiped { get => isEquiped; set => isEquiped = value; }
+    public int PowerBonus { get => powerBonus; set => powerBonus = value; }
+    public int HealthBonus { get => healthBonus; set => healthBonus = value; }
 
     // Start is called before the first frame update
     void Start()
