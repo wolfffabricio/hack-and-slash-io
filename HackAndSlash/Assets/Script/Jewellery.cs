@@ -10,10 +10,10 @@ public class Jewellery : MonoBehaviour
     private int powerBonus;
     private int healthBonus;
 
-    public Jewellery(string name, string type, int powerBonus, int healthBonus)
+    public Jewellery(string jewellName, string jewellType, int powerBonus, int healthBonus)
     {
-        this.jewellName = name;
-        this.jewellType = type;
+        this.jewellName = jewellName;
+        this.jewellType = jewellType;
         this.powerBonus = powerBonus;
         this.healthBonus = healthBonus;
     }
@@ -31,6 +31,14 @@ public class Jewellery : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void SetJewellery(Jewellery jewellery)
+    {
+        this.jewellName = jewellery.jewellName;
+        this.jewellType = jewellery.jewellType;
+        this.powerBonus = jewellery.powerBonus;
+        this.healthBonus = jewellery.healthBonus;
     }
 }
