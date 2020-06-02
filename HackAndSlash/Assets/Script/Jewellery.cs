@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class Jewellery : MonoBehaviour
 {
-    private bool isEquiped;
     private string jewellName;
     private string jewellType;
     private int powerBonus;
     private int healthBonus;
+    private bool isEquiped;
 
-    public Jewellery(string jewellName, string jewellType, int powerBonus, int healthBonus)
+    public Jewellery(string jewellName, string jewellType, int powerBonus, int healthBonus,bool isEquiped)
     {
         this.jewellName = jewellName;
         this.jewellType = jewellType;
         this.powerBonus = powerBonus;
         this.healthBonus = healthBonus;
+        this.isEquiped = isEquiped;
     }
 
-    public bool IsEquiped { get => isEquiped; set => isEquiped = value; }
+    public string JewellName { get => jewellName; set => jewellName = value; }
+    public string JewellType { get => jewellType; set => jewellType = value; }
     public int PowerBonus { get => powerBonus; set => powerBonus = value; }
     public int HealthBonus { get => healthBonus; set => healthBonus = value; }
+    public bool IsEquiped { get => isEquiped; set => isEquiped = value; }
 
     // Start is called before the first frame update
     void Start()

@@ -8,11 +8,18 @@ public class Player : PlayersParent
     public KeyCode useItemKey = KeyCode.Q;
     public KeyCode pickItemKey = KeyCode.E;
 
-    void Start()
+    void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        health = 100;
+        
+        health = 100+ GameObject.Find("User").GetComponent<User>().HealthBonus;
+        powerBonus = GameObject.Find("User").GetComponent<User>().PowerBonus;
+
         item = null;
+
+        Debug.Log("Partida começou!");
+        Debug.Log("Vida inicial:"+ health);
+        Debug.Log("Poder extra:"+ powerBonus);
     }
 
     // Update is called once per frame
