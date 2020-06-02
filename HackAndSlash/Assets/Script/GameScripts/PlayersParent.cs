@@ -11,9 +11,11 @@ public abstract class PlayersParent : MonoBehaviour
 
     protected float speed = 6.0f;
     protected int health;
+    protected int powerBonus;
 
     protected float invencibilityTimer=0;
     public GameObject Item { get => item; set => item = value; }
+    public int PowerBonus { get => powerBonus; set => powerBonus = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -104,7 +106,8 @@ public abstract class PlayersParent : MonoBehaviour
             {
                 invencibilityTimer = 1.0f;
 
-                Debug.Log("Acertou");
+                Debug.Log("Acertou, dano:"+ collider.gameObject.GetComponent<ItensParent>().Power);
+
                 health -= collider.gameObject.GetComponent<ItensParent>().Power;
                 CheckIfDied();
             }
