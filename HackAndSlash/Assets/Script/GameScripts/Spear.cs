@@ -59,6 +59,8 @@ public class Spear : ItensParent
             transform.localPosition = new Vector3(0.2f, 0, 0);
 
             transform.localRotation = Quaternion.LookRotation(Vector3.down);
+
+            power += gameObject.GetComponentInParent<PlayersParent>().PowerBonus;
         }
     }
 
