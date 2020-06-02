@@ -1,5 +1,5 @@
-Anel de Força@Anel@5@0@True
-Anel de Vida@Anel@0@5@False
+Anel de Força@Anel@5@0@False
+Anel de Vida@Anel@0@5@True
 Brinco quebrado@Brinco@1@1@True
 Coroa quebrada@Coroa@1@1@True
 Colar quebrado@Colar@1@1@True

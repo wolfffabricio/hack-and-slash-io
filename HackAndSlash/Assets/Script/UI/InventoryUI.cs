@@ -31,6 +31,11 @@ public class InventoryUI : MonoBehaviour
         inventory=GameObject.Find("Inventory").GetComponent<Inventory>();
 
         UpdateTexts();
+
+        //Debug.Log(Screen.width);
+        //645-55
+        Vector2 v = new Vector2(Screen.width * 55 / 645, Screen.width * 55 / 645);
+        GameObject.Find("GridLayoutContent").GetComponent<GridLayoutGroup>().cellSize = v;
     }
 
     // Update is called once per frame
