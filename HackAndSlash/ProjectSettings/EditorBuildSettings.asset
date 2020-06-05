@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Inventory.unity
     guid: ee2f335dbd5f6054e9a2badbc5a04b47
+  - enabled: 1
+    path: Assets/Scenes/SkillTree.unity
+    guid: 645e60690bb52fd44be541e7b3ed63e9
   m_configObjects: {}
