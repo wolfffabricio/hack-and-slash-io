@@ -8,7 +8,9 @@ public class User : MonoBehaviour
     private int powerBonus;
     private int healthBonus;
     private Dictionary<string, Jewellery> activeJewellery = new Dictionary<string, Jewellery>();
+    private List<Skill> activeSkills;
 
+    public int Gold { get => gold; set => gold = value; }
     public int PowerBonus { get => powerBonus; set => powerBonus = value; }
     public int HealthBonus { get => healthBonus; set => healthBonus = value; }
 
@@ -25,6 +27,9 @@ public class User : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        gold = 10;
+        activeSkills = new List<Skill>();
     }
 
     // Start is called before the first frame update
@@ -90,5 +95,16 @@ public class User : MonoBehaviour
         }
 
         return jewellsName;
+    }
+
+    public void SpendGold(int quantity)
+    {
+        gold -= quantity;
+    }
+
+    public void AddActiveSkill(Skill s)
+    {
+        activeSkills.Add(s);
+        s.IsEquiped = true;
     }
 }
