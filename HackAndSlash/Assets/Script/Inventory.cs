@@ -17,16 +17,10 @@ public class Inventory : MonoBehaviour
 
     User user;
 
-    int[,] grid;
-    GameObject gridLayoutContent;
-    GameObject prefabImg;
+    
     // Awake is called before the Start
     private void Awake()
     {
-        gridLayoutContent = GameObject.Find("GridLayoutContent");
-
-        prefabImg = Resources.Load("Jewellery") as GameObject;
-
         user = GameObject.Find("User").GetComponent<User>();
     }
 
@@ -34,27 +28,8 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         ReadString();
-        //
-        PopulateGrid();
-    }
 
-    void PopulateGrid()
-    {
-        grid = new int[5, Mathf.CeilToInt(myJewellery.Count / 5.0f)];
-        GameObject newobj;
-
-        for (int i = 0; i < myJewellery.Count; i++)
-        {
-            newobj = (GameObject)Instantiate(prefabImg, gridLayoutContent.transform);
-            newobj.GetComponent<Image>().color = UnityEngine.Random.ColorHSV();
-
-            newobj.AddComponent<Jewellery>();
-            newobj.GetComponent<Jewellery>().SetJewellery(myJewellery[i]);
-
-            InventoryUI inventoryUI = GameObject.Find("InventoryUI").GetComponent<InventoryUI>();
-            Jewellery j = myJewellery[i];
-            newobj.GetComponent<Button>().onClick.AddListener(delegate { inventoryUI.ShowEquipOrUnequipButton(ref j); });
-        }
+        GameObject.Find("InventoryUI").GetComponent<InventoryUI>().PopulateGrid(myJewellery);
     }
 
     // Update is called once per frame
@@ -134,7 +109,9 @@ public class Inventory : MonoBehaviour
             line += jewellery.JewellType + "@";
             line += jewellery.PowerBonus + "@";
             line += jewellery.HealthBonus + "@";
-            line += jewellery.IsEquiped;
+            line += jewellery.IsEquiped + "@";
+            line += jewellery.Level;
+
             writer.WriteLine(line);
         }
 
@@ -152,7 +129,7 @@ public class Inventory : MonoBehaviour
             {
                 string[] lines = sr.ReadLine().Split('@');
 
-                Jewellery jewellery = new Jewellery(lines[0], lines[1], Int32.Parse(lines[2]), Int32.Parse(lines[3]), Convert.ToBoolean(lines[4]));
+                Jewellery jewellery = new Jewellery(lines[0], lines[1], Int32.Parse(lines[2]), Int32.Parse(lines[3]), Convert.ToBoolean(lines[4]), Int32.Parse(lines[5]));
                 myJewellery.Add(jewellery);
 
                 if (jewellery.IsEquiped)
