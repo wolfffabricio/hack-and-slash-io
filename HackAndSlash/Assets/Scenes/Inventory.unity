@@ -460,7 +460,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Coroa
+  m_Text: Brinco
 --- !u!222 &352615177
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2264,7 +2264,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Brinco
+  m_Text: Coroa
 --- !u!222 &1817047134
 CanvasRenderer:
   m_ObjectHideFlags: 0
