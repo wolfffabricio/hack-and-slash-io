@@ -1,6 +1,6 @@
-Anel de Força@Anel@5@0@False
-Anel de Vida@Anel@0@5@True
-Brinco quebrado@Brinco@1@1@True
-Coroa quebrada@Coroa@1@1@True
-Colar quebrado@Colar@1@1@True
-Broche quebrado@Broche@1@1@True
+Anel Simples@Anel@1@0@True@1
+Brinco Simples@Brinco@0@1@True@1
+Coroa Simples@Coroa@1@0@True@1
+Colar Simples@Colar@1@0@True@1
+Broche Simples@Broche@0@1@False@1
+Broche Melhorado@Broche@0@5@True@2
