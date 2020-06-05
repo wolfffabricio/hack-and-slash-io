@@ -14,8 +14,7 @@ public class User : MonoBehaviour
 
     private static GameObject thisInstance;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         if (thisInstance == null)
         {
@@ -26,6 +25,12 @@ public class User : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
