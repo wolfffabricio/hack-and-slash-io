@@ -106,7 +106,12 @@ public abstract class PlayersParent : MonoBehaviour
             {
                 invencibilityTimer = 1.0f;
 
-                Debug.Log("Acertou, dano:"+ collider.gameObject.GetComponent<ItensParent>().Power);
+                string damageMsg = this.gameObject.name;
+                damageMsg += " foi acertado por um ";
+                damageMsg += collider.gameObject.name;
+                damageMsg += ". Dano:" + collider.gameObject.GetComponent<ItensParent>().Power;
+
+                Debug.Log(damageMsg);
 
                 health -= collider.gameObject.GetComponent<ItensParent>().Power;
                 CheckIfDied();
