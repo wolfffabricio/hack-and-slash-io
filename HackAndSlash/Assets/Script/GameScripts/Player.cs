@@ -17,9 +17,10 @@ public class Player : PlayersParent
 
         item = null;
 
-        Debug.Log("Partida começou!");
-        Debug.Log("Vida inicial:"+ health);
-        Debug.Log("Poder extra:"+ powerBonus);
+        string msg = "Partida começou!";
+        msg += " Vida inicial:" + health;
+        msg += ". Poder extra:" + powerBonus;
+        Debug.Log(msg);
     }
 
     // Update is called once per frame

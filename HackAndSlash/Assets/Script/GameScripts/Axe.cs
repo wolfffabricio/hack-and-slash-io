@@ -11,7 +11,7 @@ public class Axe : ItensParent
         charges = 10;
         onGround = true;
         attacking = false;
-        power = 30;
+        power = 20;
     }
 
     // Start is called before the first frame update
@@ -35,6 +35,7 @@ public class Axe : ItensParent
             if (attackDuration < 0)
             {
                 attacking = false;
+                gameObject.GetComponent<Animator>().SetBool("isAttacking", false);
 
                 if (charges == 0)
                 {
@@ -78,12 +79,11 @@ public class Axe : ItensParent
 
             attacking = true;
 
-            //TODO - animação de atk
-            //transform.localPosition = new Vector3(0.2f, 0, 1.5f);
-            gameObject.GetComponent<Animation>().Play();
+            //animação de atk
+            gameObject.GetComponent<Animator>().SetBool("isAttacking", true);
 
-            attackDuration = 0.25f;
-            attackCooldown = 0.75f;
+            attackDuration = 0.32f;
+            attackCooldown = 0.32f;
         }
     }
 }

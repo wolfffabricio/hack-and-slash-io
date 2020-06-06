@@ -11,7 +11,7 @@ public class Spear : ItensParent
         charges = 10;
         onGround = true;
         attacking = false;
-        power = 30;
+        power = 35;
     }
 
     // Start is called before the first frame update
