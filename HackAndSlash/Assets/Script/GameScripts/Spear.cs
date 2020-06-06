@@ -6,13 +6,18 @@ public class Spear : ItensParent
 {
     float attackDuration = 0;
     float attackCooldown = 0;
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         charges = 10;
         onGround = true;
         attacking = false;
         power = 30;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
