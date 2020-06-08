@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Axe : ItensParent
+public class Staff : ItensParent
 {
     float attackDuration = 0;
     float attackCooldown = 0;
+    GameObject projectile;
     private void Awake()
     {
-        charges = 15;
+        charges = 3;
         onGround = true;
         attacking = false;
-        power = 20;
+        power = 40;
+        projectile = Resources.Load("Weapons_Prefabs/Staff_Projectile") as GameObject;
     }
 
     // Start is called before the first frame update
@@ -35,15 +37,6 @@ public class Axe : ItensParent
             if (attackDuration < 0.0f)
             {
                 attacking = false;
-
-                if (charges == 0)
-                {
-                    //TODO destruir item
-                    gameObject.GetComponentInParent<PlayersParent>().Item = null;
-                    Destroy(this.gameObject);
-                }
-
-                transform.localPosition = new Vector3(0, 0, 0.45f);
             }
         }
     }
@@ -62,11 +55,15 @@ public class Axe : ItensParent
         {
             onGround = false;
 
-            transform.localPosition = new Vector3(0, 0, 0.45f);
+            transform.localPosition = new Vector3(0.4f, 0, 0);
 
             transform.localRotation = Quaternion.LookRotation(Vector3.down);
 
             power += gameObject.GetComponentInParent<PlayersParent>().PowerBonus;
+            projectile.GetComponent<StaffProjectile>().Power = power;
+
+            //ja q o cajado nao ataca diretamente, tem q fazer isso
+            gameObject.GetComponent<CapsuleCollider>().enabled = false;
         }
     }
 
@@ -74,15 +71,24 @@ public class Axe : ItensParent
     {
         if (attackCooldown <= 0 && !attacking)
         {
-            charges--;
+            charges--; 
 
             attacking = true;
 
             //animação de atk
-            gameObject.GetComponent<Animator>().SetTrigger("Attack");
+            //gameObject.GetComponent<Animator>().SetTrigger("Attack");
 
-            attackDuration = 0.5f;
-            attackCooldown = 0.5f;
+            Instantiate(projectile, transform.position, transform.parent.rotation);
+
+            attackDuration = 3.0f;
+            attackCooldown = 3.0f;
+
+            if (charges == 0)
+            {
+                //TODO destruir item
+                gameObject.GetComponentInParent<PlayersParent>().Item = null;
+                Destroy(this.gameObject);
+            }
         }
     }
 }
