@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class WeaponsSpawner : MonoBehaviour
 {
-    List<GameObject> weapons=new List<GameObject>();
-    float timer=5.0f;
+    List<GameObject> weapons = new List<GameObject>();
+    float timer = 5.0f;
     private void Awake()
     {
         weapons.Add(Resources.Load("Weapons_Prefabs/Elven_Spear") as GameObject);
         weapons.Add(Resources.Load("Weapons_Prefabs/Elven_Axe") as GameObject);
+        weapons.Add(Resources.Load("Weapons_Prefabs/Elven_Staff") as GameObject);
     }
 
     // Start is called before the first frame update
@@ -24,7 +25,7 @@ public class WeaponsSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(checkTimer())
+        if (checkTimer())
         {
             SpawnWeapon(RandomPrefab(), RandomPosition(), RandomRotation());
         }
@@ -62,7 +63,7 @@ public class WeaponsSpawner : MonoBehaviour
 
     bool checkTimer()
     {
-        if(timer<=0)
+        if (timer <= 0)
         {
             timer = 5.0f;
             return true;
