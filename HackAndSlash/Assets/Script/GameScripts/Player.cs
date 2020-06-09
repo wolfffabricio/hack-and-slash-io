@@ -26,14 +26,26 @@ public class Player : PlayersParent
     // Update is called once per frame
     void Update()
     {
-        moveDirection = new Vector3(Input.GetAxis("Horizontal"), -1.00f, Input.GetAxis("Vertical"));
+        MoveDirection();
         PlayersMove();
-
         PlayersRotation();
 
         PlayersAttack(Input.GetKey(useItemKey));
 
         CheckInvencibiliyTimer();
+    }
+
+    void MoveDirection()
+    {
+        if (characterController.isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.00f, Input.GetAxis("Vertical"));
+            moveDirection *= speed;
+            //if (Input.GetButton("Jump"))
+            //{
+            //    moveDirection.y = 8.0f;
+            //}
+        }
     }
 
     void OnTriggerStay(Collider collider)

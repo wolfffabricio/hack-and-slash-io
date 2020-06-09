@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Enemy : PlayersParent
 {
-    bool isAttacking=true;
+    bool isAttacking = true;
     bool isPickingItem = true;
 
     float timerMoveRand = 0;
-
+    float moveX;
+    float moveY;
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,12 +34,21 @@ public class Enemy : PlayersParent
     {
         if (timerMoveRand < 0)
         {
-            moveDirection = new Vector3(Random.Range(-1.2f, 1.2f), -1.00f, Random.Range(-1.2f, 1.2f));
+            moveX = Random.Range(-1.2f, 1.2f);
+            moveY = Random.Range(-1.2f, 1.2f);
+
             timerMoveRand = timerToChangeDirection;
         }
         else
         {
             timerMoveRand -= Time.deltaTime;
+        }
+
+
+        if (characterController.isGrounded)
+        {
+            moveDirection = new Vector3(moveX, 0.00f, moveY);
+            moveDirection *= speed;
         }
     }
 
