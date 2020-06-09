@@ -12,12 +12,14 @@ public class Spear : ItensParent
         onGround = true;
         attacking = false;
         power = 35;
+
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager.AddGroundItem(gameObject);
     }
 
     // Update is called once per frame
@@ -66,6 +68,8 @@ public class Spear : ItensParent
             transform.localRotation = Quaternion.LookRotation(Vector3.down);
 
             power += gameObject.GetComponentInParent<PlayersParent>().PowerBonus;
+
+            gameManager.RemoveGroundItem(gameObject);
         }
     }
 
