@@ -9,6 +9,8 @@ public abstract class ItensParent : MonoBehaviour
     protected int charges;
     protected int power;
 
+    protected GameManager gameManager;
+
 
     public bool OnGround { get => onGround; set => onGround = value; }
     public bool Attacking { get => attacking; set => attacking = value; }

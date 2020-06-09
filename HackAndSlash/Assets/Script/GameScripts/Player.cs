@@ -11,13 +11,13 @@ public class Player : PlayersParent
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        
-        health = 100+ GameObject.Find("User").GetComponent<User>().HealthBonus;
+
+        health = 100 + GameObject.Find("User").GetComponent<User>().HealthBonus;
         powerBonus = GameObject.Find("User").GetComponent<User>().PowerBonus;
 
         item = null;
 
-        bloodParticle= Resources.Load("Particle/Blood_Particle") as GameObject;
+        bloodParticle = Resources.Load("Particle/Blood_Particle") as GameObject;
 
         string msg = "Partida começou!";
         msg += " Vida inicial:" + health;

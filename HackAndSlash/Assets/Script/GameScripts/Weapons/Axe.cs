@@ -12,12 +12,14 @@ public class Axe : ItensParent
         onGround = true;
         attacking = false;
         power = 20;
+
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager.AddGroundItem(gameObject);
     }
 
     // Update is called once per frame
@@ -67,6 +69,8 @@ public class Axe : ItensParent
             transform.localRotation = Quaternion.LookRotation(Vector3.down);
 
             power += gameObject.GetComponentInParent<PlayersParent>().PowerBonus;
+
+            gameManager.RemoveGroundItem(gameObject);
         }
     }
 
