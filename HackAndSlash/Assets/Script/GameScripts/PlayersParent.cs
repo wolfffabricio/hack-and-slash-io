@@ -13,7 +13,7 @@ public abstract class PlayersParent : MonoBehaviour
     protected int health;
     protected int powerBonus;
 
-    protected float invencibilityTimer=0;
+    protected float invencibilityTimer = 0;
     public GameObject Item { get => item; set => item = value; }
     public int PowerBonus { get => powerBonus; set => powerBonus = value; }
 
@@ -31,8 +31,9 @@ public abstract class PlayersParent : MonoBehaviour
 
     protected void PlayersMove()
     {
+        moveDirection.y -= 20.0f * Time.deltaTime;
         // Move the controller
-        characterController.Move((moveDirection * speed) * Time.deltaTime);
+        characterController.Move(moveDirection * Time.deltaTime);
     }
 
     protected void PlayersRotation()
@@ -102,8 +103,11 @@ public abstract class PlayersParent : MonoBehaviour
     {
         if (collider.tag == "Item")
         {
-            if (collider.gameObject != item && collider.gameObject.GetComponent<ItensParent>().Attacking && invencibilityTimer<=0)
+            if (collider.gameObject != item && collider.gameObject.GetComponent<ItensParent>().Attacking && invencibilityTimer <= 0)
             {
+                Vector3 knockbackDirection = CheckKnockbackPosition(collider);
+                ApplyKnockBack(knockbackDirection);
+
                 invencibilityTimer = 1.0f;
 
                 string damageMsg = this.gameObject.name;
@@ -119,9 +123,65 @@ public abstract class PlayersParent : MonoBehaviour
         }
     }
 
+    protected Vector3 CheckKnockbackPosition(Collider collider)
+    {
+        Vector3 myPosition = transform.position;
+        Vector3 coliderPosition;
+
+        if (collider.transform.parent == null)
+        {
+            coliderPosition = collider.transform.position;
+        }
+        else
+        {
+            coliderPosition = collider.transform.parent.position;
+        }
+
+        float difX = coliderPosition.normalized.x - myPosition.normalized.x;
+        float difZ = coliderPosition.normalized.z - myPosition.normalized.z;
+
+        if (difX > difZ)
+        {
+            if (coliderPosition.x > myPosition.x)
+            {
+                Debug.Log("bateu da direita");
+                return Vector3.left;
+            }
+            else
+            {
+                Debug.Log("bateu da esquerda");
+                return Vector3.right;
+            }
+        }
+        else
+        {
+            if (coliderPosition.z > myPosition.z)
+            {
+                Debug.Log("bateu do norte");
+                return Vector3.back;
+            }
+            else
+            {
+                Debug.Log("bateu do sul");
+                return Vector3.forward;
+            }
+        }
+    }
+
+    protected void ApplyKnockBack(Vector3 knockbackDirection)
+    {
+        transform.Translate(Vector3.up);
+
+        moveDirection = knockbackDirection;
+        moveDirection.y = 1.0f;
+        moveDirection *= speed;
+
+        PlayersMove();
+    }
+
     protected void CheckInvencibiliyTimer()
     {
-        if(invencibilityTimer>0)
+        if (invencibilityTimer > 0)
         {
             invencibilityTimer -= Time.deltaTime;
         }
@@ -129,7 +189,7 @@ public abstract class PlayersParent : MonoBehaviour
 
     protected void CheckIfDied()
     {
-        if(health<=0)
+        if (health <= 0)
         {
             Destroy(this.gameObject);
         }
