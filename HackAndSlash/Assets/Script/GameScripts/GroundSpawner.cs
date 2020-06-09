@@ -12,6 +12,7 @@ public class GroundSpawner : MonoBehaviour
         groundObs.Add(Resources.Load("GroundObjs/Dandelion") as GameObject);
         groundObs.Add(Resources.Load("GroundObjs/Fern") as GameObject);
         groundObs.Add(Resources.Load("GroundObjs/Mushroom") as GameObject);
+        groundObs.Add(Resources.Load("GroundObjs/Plant") as GameObject);
     }
 
     // Start is called before the first frame update

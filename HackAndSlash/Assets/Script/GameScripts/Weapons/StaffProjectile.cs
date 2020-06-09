@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StaffProjectile : ItensParent
 {
-    float attackDuration = 3.0f;
+    float attackDuration = 10.0f;
     int diretcion;
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class StaffProjectile : ItensParent
         attackDuration -= Time.deltaTime;
         if (attackDuration < 0.0f)
         {
-            //Destroy(this.gameObject);
+           Destroy(this.gameObject);
         }
 
         gameObject.transform.Translate(Vector3.forward * Time.deltaTime * 10);
