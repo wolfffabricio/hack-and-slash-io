@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class GroundSpawner : MonoBehaviour
 {
-    GameObject stump;
-    GameObject dandelion;
+    List<GameObject> groundObs = new List<GameObject>();
 
     private void Awake()
     {
-        stump = Resources.Load("GroundObjs/Stump") as GameObject;
-        dandelion = Resources.Load("GroundObjs/Dandelion") as GameObject;
+        groundObs.Add(Resources.Load("GroundObjs/Stump") as GameObject);
+        groundObs.Add(Resources.Load("GroundObjs/Dandelion") as GameObject);
+        groundObs.Add(Resources.Load("GroundObjs/Fern") as GameObject);
+        groundObs.Add(Resources.Load("GroundObjs/Mushroom") as GameObject);
     }
 
     // Start is called before the first frame update
@@ -24,28 +25,19 @@ public class GroundSpawner : MonoBehaviour
 
     GameObject RandomPrefab()
     {
-       int rand= Random.Range(1,3);
-        switch (rand)
-        {
-            case 1:
-                return stump;
-            case 2:
-                return dandelion;
-            default:
-                throw new System.Exception("Erro no random");
-        }
+        return groundObs[Random.Range(0, groundObs.Count)];
     }
 
     Vector3 RandomPosition()
     {
-        Vector3 position = new Vector3(Random.Range(-45.0f, 45.1f), 1.0f, Random.Range(-45.0f, 45.1f));
+        Vector3 position = new Vector3(Random.Range(-45.0f, 45.1f), 0.0f, Random.Range(-45.0f, 45.1f));
 
         return position;
     }
 
     Quaternion RandomRotation()
     {
-        switch(Random.Range(1, 5))
+        switch (Random.Range(1, 5))
         {
             case 1:
                 return Quaternion.LookRotation(Vector3.forward);
@@ -59,8 +51,13 @@ public class GroundSpawner : MonoBehaviour
         }
     }
 
-    void SpawnObj(GameObject gameO,Vector3 position,Quaternion rotation)
+    void SpawnObj(GameObject gameO, Vector3 position, Quaternion rotation)
     {
+        if (gameO.name == "Stump")
+        {
+            position.y = 1.0f;
+        }
+
         Instantiate(gameO, position, rotation, this.transform);
     }
 
