@@ -9,6 +9,8 @@ public abstract class PlayersParent : MonoBehaviour
 
     protected GameObject item;
 
+    protected GameObject bloodParticle;
+
     protected float speed = 6.0f;
     protected int health;
     protected int powerBonus;
@@ -20,7 +22,7 @@ public abstract class PlayersParent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -116,6 +118,8 @@ public abstract class PlayersParent : MonoBehaviour
                 damageMsg += ". Dano:" + collider.gameObject.GetComponent<ItensParent>().Power;
 
                 Debug.Log(damageMsg);
+
+                Instantiate(bloodParticle, transform.position, Quaternion.Euler(Vector3.up));
 
                 health -= collider.gameObject.GetComponent<ItensParent>().Power;
                 CheckIfDied();
