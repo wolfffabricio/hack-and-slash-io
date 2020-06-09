@@ -24,7 +24,7 @@ public class Enemy : PlayersParent
     // Update is called once per frame
     void Update()
     {
-        EnemyMoveRandom(0.5f);
+        EnemyMoveRandom();
         PlayersMove();
 
         PlayersRotation();
@@ -34,14 +34,14 @@ public class Enemy : PlayersParent
         CheckInvencibiliyTimer();
     }
 
-    void EnemyMoveRandom(float timerToChangeDirection)
+    void EnemyMoveRandom()
     {
         if (timerMoveRand < 0)
         {
             moveX = Random.Range(-1.2f, 1.2f);
             moveY = Random.Range(-1.2f, 1.2f);
 
-            timerMoveRand = timerToChangeDirection;
+            timerMoveRand = Random.Range(0.2f, 7.5f);
         }
         else
         {

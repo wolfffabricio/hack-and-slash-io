@@ -148,12 +148,12 @@ public abstract class PlayersParent : MonoBehaviour
         {
             if (coliderPosition.x > myPosition.x)
             {
-                Debug.Log("bateu da direita");
+                //Debug.Log("bateu da direita");
                 return Vector3.left;
             }
             else
             {
-                Debug.Log("bateu da esquerda");
+                //Debug.Log("bateu da esquerda");
                 return Vector3.right;
             }
         }
@@ -161,12 +161,12 @@ public abstract class PlayersParent : MonoBehaviour
         {
             if (coliderPosition.z > myPosition.z)
             {
-                Debug.Log("bateu do norte");
+                //Debug.Log("bateu do norte");
                 return Vector3.back;
             }
             else
             {
-                Debug.Log("bateu do sul");
+                //Debug.Log("bateu do sul");
                 return Vector3.forward;
             }
         }
@@ -195,6 +195,10 @@ public abstract class PlayersParent : MonoBehaviour
     {
         if (health <= 0)
         {
+            if(gameObject.name=="Player")
+            {
+                GameObject.Find("Game Manager").GetComponent<GameManager>().PlayerDeath();
+            }
             Destroy(this.gameObject);
         }
     }

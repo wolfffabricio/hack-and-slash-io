@@ -14,12 +14,14 @@ public class Staff : ItensParent
         attacking = false;
         power = 40;
         projectile = Resources.Load("Weapons_Prefabs/Staff_Projectile") as GameObject;
+
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager.AddGroundItem(gameObject);
     }
 
     // Update is called once per frame
@@ -61,6 +63,8 @@ public class Staff : ItensParent
 
             power += gameObject.GetComponentInParent<PlayersParent>().PowerBonus;
             projectile.GetComponent<StaffProjectile>().Power = power;
+
+            gameManager.RemoveGroundItem(gameObject);
 
             //ja q o cajado nao ataca diretamente, tem q fazer isso
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
