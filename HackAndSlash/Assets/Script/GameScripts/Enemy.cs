@@ -15,6 +15,10 @@ public class Enemy : PlayersParent
     {
         characterController = GetComponent<CharacterController>();
         health = 100;
+
+        item = null;
+
+        bloodParticle = Resources.Load("Particle/Blood_Particle") as GameObject;
     }
 
     // Update is called once per frame
