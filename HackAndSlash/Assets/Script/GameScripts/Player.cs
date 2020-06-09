@@ -17,6 +17,8 @@ public class Player : PlayersParent
 
         item = null;
 
+        bloodParticle= Resources.Load("Particle/Blood_Particle") as GameObject;
+
         string msg = "Partida começou!";
         msg += " Vida inicial:" + health;
         msg += ". Poder extra:" + powerBonus;
