@@ -39,7 +39,7 @@ public class WeaponsSpawner : MonoBehaviour
 
     Vector3 RandomPosition()
     {
-        Vector3 position = new Vector3(Random.Range(-45.0f, 45.1f), 1.0f, Random.Range(-45.0f, 45.1f));
+        Vector3 position = new Vector3(Random.Range(-45.0f, 45.1f), 0.25f, Random.Range(-45.0f, 45.1f));
 
         return position;
     }
