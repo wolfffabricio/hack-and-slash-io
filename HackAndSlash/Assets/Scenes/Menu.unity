@@ -469,7 +469,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play
+  m_Text: Jogar
 --- !u!222 &663689959
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1001,7 +1001,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Skill Tree
+  m_Text: Arvore de Habilidades
 --- !u!222 &1331148503
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1153,7 +1153,7 @@ GameObject:
   - component: {fileID: 1478357356}
   - component: {fileID: 1478357355}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1303,7 +1303,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Inventory
+  m_Text: Inventario
 --- !u!222 &1810263284
 CanvasRenderer:
   m_ObjectHideFlags: 0

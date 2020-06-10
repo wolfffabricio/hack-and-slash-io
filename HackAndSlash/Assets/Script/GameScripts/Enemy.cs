@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Enemy : PlayersParent
 {
-    bool isAttacking = true;
-    bool isPickingItem = true;
+    public bool isAttacking = true;
+    public bool isPickingItem = true;
 
     float timerMoveRand = 0;
-    float moveX;
-    float moveY;
+    public float moveX;
+    public float moveZ;
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,7 +24,8 @@ public class Enemy : PlayersParent
     // Update is called once per frame
     void Update()
     {
-        EnemyMoveRandom();
+        //EnemyMoveRandom();
+        EnemyMove();
         PlayersMove();
 
         PlayersRotation();
@@ -39,7 +40,7 @@ public class Enemy : PlayersParent
         if (timerMoveRand < 0)
         {
             moveX = Random.Range(-1.2f, 1.2f);
-            moveY = Random.Range(-1.2f, 1.2f);
+            moveZ = Random.Range(-1.2f, 1.2f);
 
             timerMoveRand = Random.Range(0.2f, 7.5f);
         }
@@ -47,12 +48,26 @@ public class Enemy : PlayersParent
         {
             timerMoveRand -= Time.deltaTime;
         }
+    }
 
-
+    void EnemyMove()
+    {
         if (characterController.isGrounded)
         {
-            moveDirection = new Vector3(moveX, 0.00f, moveY);
+            moveDirection = new Vector3(moveX, 0.00f,moveZ);
             moveDirection *= speed;
+        }
+    }
+
+    public bool StillHaveWeapon()
+    {
+        if(item!=null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

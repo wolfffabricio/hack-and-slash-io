@@ -590,7 +590,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy
+  m_Text: Comprar
 --- !u!222 &353496238
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2147,7 +2147,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Go Back
+  m_Text: Voltar
 --- !u!222 &1538982090
 CanvasRenderer:
   m_ObjectHideFlags: 0
