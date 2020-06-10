@@ -3,4 +3,4 @@ Brinco Simples@Brinco@0@1@True@1
 Coroa Simples@Coroa@1@0@True@1
 Colar Simples@Colar@1@0@True@1
 Broche Simples@Broche@0@1@False@1
-Broche Melhorado@Broche@0@5@True@2
+Broche Melhorado@Broche@0@5@False@2
