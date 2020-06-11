@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 
 public class Inventory : MonoBehaviour
@@ -17,19 +13,22 @@ public class Inventory : MonoBehaviour
 
     User user;
 
-    
+    public List<Jewellery> MyJewellery { get => myJewellery; /*set => myJewellery = value; */}
+    public Dictionary<string, Jewellery> ActiveJewellery { get => activeJewellery;/* set => activeJewellery = value;*/ }
+
+
     // Awake is called before the Start
     private void Awake()
     {
         user = GameObject.Find("User").GetComponent<User>();
+
+        ReadString();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        ReadString();
 
-        GameObject.Find("InventoryUI").GetComponent<InventoryUI>().PopulateGrid(myJewellery);
     }
 
     // Update is called once per frame
@@ -80,19 +79,86 @@ public class Inventory : MonoBehaviour
         ReturnAllHealthBonus();
     }
 
-    public string[] EquippedJewellsName()
+    public bool BuyLootBox()
     {
-        string[] jewellsName = new string[activeJewellery.Count];
 
-        int count = 0;
-        foreach (KeyValuePair<string, Jewellery> jewell in activeJewellery)
+        int itemPrice = 10;
+        if (user.Gold >= itemPrice)
         {
+            user.SpendGold(itemPrice);
 
-            jewellsName[count] = jewell.Value.JewellName;
-            count++;
+            CreateNewJewell();
+
+            return true;
+        }
+        else
+        {
+            return false;
         }
 
-        return jewellsName;
+    }
+
+    public void CreateNewJewell()
+    {
+        int jewellTypeRand = UnityEngine.Random.Range(1, 6);
+        int level = UnityEngine.Random.Range(1, 8);
+        int powerRand = 0;
+        int healthRand = 0;
+        string jewellType = "";
+        switch (jewellTypeRand)
+        {
+            case 1:
+                jewellType = "Anel";
+                powerRand = Mathf.RoundToInt(UnityEngine.Random.Range(0.5f, 2.0f) * level);
+                break;
+            case 2:
+                jewellType = "Brinco";
+                powerRand = Mathf.RoundToInt(UnityEngine.Random.Range(0.5f, 2.0f) * level);
+                break;
+            case 3:
+                jewellType = "Coroa";
+                powerRand = Mathf.RoundToInt(UnityEngine.Random.Range(0.5f, 2.0f) * level);
+                break;
+            case 4:
+                jewellType = "Colar";
+                healthRand = Mathf.RoundToInt(UnityEngine.Random.Range(0.5f, 2.0f) * level);
+                break;
+            case 5:
+                jewellType = "Broche";
+                healthRand = Mathf.RoundToInt(UnityEngine.Random.Range(0.5f, 2.0f) * level);
+                break;
+        }
+
+        string jewellName = jewellType;
+        switch (level)
+        {
+            case 1:
+                jewellName += " Simples";
+                break;
+            case 2:
+                jewellName += " Melhorado";
+                break;
+            case 3:
+                jewellName += " de Prata";
+                break;
+            case 4:
+                jewellName += " de Ouro";
+                break;
+            case 5:
+                jewellName += " de Diamante";
+                break;
+            case 6:
+                jewellName += " de Diamante Negro";
+                break;
+            case 7:
+                jewellName += " de Esmeralda";
+                break;
+        }
+
+        Jewellery newJewell = new Jewellery(jewellName, jewellType, powerRand, healthRand, false, level);
+        myJewellery.Add(newJewell);
+
+        WriteString();
     }
 
     //chamar ao ganhar um novo equipamento
