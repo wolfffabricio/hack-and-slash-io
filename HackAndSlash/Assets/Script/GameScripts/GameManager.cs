@@ -46,7 +46,11 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject go in allGroundItens)
         {
-            allGroundItensTransform.Add(go.transform);
+            //verificação que nao iria precisar, mas por algum motivo precisa
+            if (go != null)
+            {
+                allGroundItensTransform.Add(go.transform);
+            }
         }
 
         return allGroundItensTransform;

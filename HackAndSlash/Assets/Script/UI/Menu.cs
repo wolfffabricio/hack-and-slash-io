@@ -31,4 +31,9 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
+
+    public void ConfigButton()
+    {
+        SceneManager.LoadScene(4);
+    }
 }

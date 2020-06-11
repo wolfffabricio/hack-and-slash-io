@@ -112,12 +112,11 @@ public abstract class PlayersParent : MonoBehaviour
 
                 invencibilityTimer = 1.0f;
 
-                string damageMsg = this.gameObject.name;
-                damageMsg += " foi acertado por um ";
-                damageMsg += collider.gameObject.name;
-                damageMsg += ". Dano:" + collider.gameObject.GetComponent<ItensParent>().Power;
-
-                Debug.Log(damageMsg);
+                //string damageMsg = this.gameObject.name;
+                //damageMsg += " foi acertado por um ";
+                //damageMsg += collider.gameObject.name;
+                //damageMsg += ". Dano:" + collider.gameObject.GetComponent<ItensParent>().Power;
+                //Debug.Log(damageMsg);
 
                 Instantiate(bloodParticle, transform.position, Quaternion.Euler(Vector3.up));
 
