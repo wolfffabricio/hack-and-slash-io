@@ -9,10 +9,12 @@ public class User : MonoBehaviour
     private int healthBonus;
     private Dictionary<string, Jewellery> activeJewellery = new Dictionary<string, Jewellery>();
     private List<Skill> activeSkills;
+    Color playerColor=Color.blue;
 
     public int Gold { get => gold; set => gold = value; }
     public int PowerBonus { get => powerBonus; set => powerBonus = value; }
     public int HealthBonus { get => healthBonus; set => healthBonus = value; }
+    public Color PlayerColor { get => playerColor; set => playerColor = value; }
 
     private static GameObject thisInstance;
 
