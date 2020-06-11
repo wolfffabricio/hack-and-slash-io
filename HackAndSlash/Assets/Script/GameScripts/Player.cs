@@ -14,6 +14,7 @@ public class Player : PlayersParent
 
         health = 100 + GameObject.Find("User").GetComponent<User>().HealthBonus;
         powerBonus = GameObject.Find("User").GetComponent<User>().PowerBonus;
+        GetComponent<Renderer>().material.color = GameObject.Find("User").GetComponent<User>().PlayerColor;
 
         item = null;
 
