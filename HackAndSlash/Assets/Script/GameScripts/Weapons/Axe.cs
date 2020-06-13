@@ -14,6 +14,8 @@ public class Axe : ItensParent
         power = 20;
 
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        GetComponent<Animator>().enabled = false;
     }
 
     // Start is called before the first frame update
@@ -71,6 +73,8 @@ public class Axe : ItensParent
             power += gameObject.GetComponentInParent<PlayersParent>().PowerBonus;
 
             gameManager.RemoveGroundItem(gameObject);
+
+            GetComponent<Animator>().enabled = true;
         }
     }
 
