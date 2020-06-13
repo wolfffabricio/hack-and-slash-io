@@ -1,11 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponsSpawner : MonoBehaviour
 {
     List<GameObject> weapons = new List<GameObject>();
-    float timer = 5.0f;
+    float timer = 0;
     private void Awake()
     {
         weapons.Add(Resources.Load("Weapons_Prefabs/Elven_Spear") as GameObject);
