@@ -51,13 +51,10 @@ public class EnemyAI : MonoBehaviour
                     MoveToEnemy();
                 }
 
-                //pegar referencia do iniimgo mais proximo e ver se estou em range pra bater nele
-                //se sim, troca behaviou pra atk, se nao, me aproximo dele
                 break;
             case "Attacking":
                 UpdateMyEnemies();
 
-                //checar se minha arma não quebrou
                 if (gameObject.GetComponent<Enemy>().StillHaveWeapon())
                 {
                     if (CheckClosestEnemy())
