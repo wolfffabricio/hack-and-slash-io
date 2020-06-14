@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        //Debug.Log("Itens:"+allGroundItensTransform.Count);
         return allGroundItensTransform;
     }
 

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    string behaviour= "Looking For Item";// Looking For Item, Looking for Enemy, Attacking
+    public string behaviour = "Looking For Item";// Looking For Item, Looking for Enemy, Attacking
 
     List<Transform> allGroundItens = new List<Transform>();
     List<Transform> myEnemies = new List<Transform>();
 
-    Transform closestItem;
-    Transform closestEnemy;
+    public Transform closestItem;
+    public Transform closestEnemy;
 
     GameManager gameManager;
     private void Awake()
@@ -30,7 +30,7 @@ public class EnemyAI : MonoBehaviour
             case "Looking For Item":
                 UpdateAllGroundItens();
 
-                if(CheckClosestItem())
+                if (CheckClosestItem())
                 {
                     PickItem();
                 }
@@ -51,20 +51,27 @@ public class EnemyAI : MonoBehaviour
                     MoveToEnemy();
                 }
 
-                //pegar referencia do iniimgo mais proximo e ver se estou em range pra bater nele
-                //se sim, troca behaviou pra atk, se nao, me aproximo dele
                 break;
             case "Attacking":
                 UpdateMyEnemies();
 
-                //checar se minha arma não quebrou
-                if(gameObject.GetComponent<Enemy>().StillHaveWeapon())
+                if (gameObject.GetComponent<Enemy>().StillHaveWeapon())
                 {
-                    gameObject.GetComponent<Enemy>().isAttacking = true;
+                    if (CheckClosestEnemy())
+                    {
+                        gameObject.GetComponent<Enemy>().isAttacking = true;
+                        MoveToEnemy();
+                    }
+                    else
+                    {
+                        behaviour = "Looking for Enemy";
+                        gameObject.GetComponent<Enemy>().isAttacking = false;
+                    }
                 }
                 else
                 {
                     behaviour = "Looking For Item";
+                    gameObject.GetComponent<Enemy>().isAttacking = false;
                 }
 
                 //checar se meu iniimgo não foi mto longe
@@ -111,7 +118,7 @@ public class EnemyAI : MonoBehaviour
                 closestEnemy = enemy;
             }
         }
-        if (nearestDistance < 2.0f)
+        if (nearestDistance < 10.0f)
         {
             return true;
         }
@@ -124,46 +131,91 @@ public class EnemyAI : MonoBehaviour
     void MoveToItem()
     {
         float myX = transform.position.x;
-        if (myX > closestItem.position.x)
+
+        if (CheckIfNeedToMove(myX, closestItem.position.x))
         {
-            gameObject.GetComponent<Enemy>().moveX = Random.Range(-1.0f, -0.2f);
-        }
-        else
-        {
-            gameObject.GetComponent<Enemy>().moveX = Random.Range(0.2f, 1.0f);
+            if (myX > closestItem.position.x)
+            {
+                gameObject.GetComponent<Enemy>().moveX = Random.Range(-1.0f, -0.2f);
+            }
+            else
+            {
+                gameObject.GetComponent<Enemy>().moveX = Random.Range(0.2f, 1.0f);
+            }
         }
 
+
         float myZ = transform.position.z;
-        if (myZ > closestItem.position.z)
+        if (CheckIfNeedToMove(myZ, closestItem.position.z))
         {
-            gameObject.GetComponent<Enemy>().moveZ = Random.Range(-1.0f, -0.2f);
-        }
-        else
-        {
-            gameObject.GetComponent<Enemy>().moveZ = Random.Range(0.2f, 1.0f);
+            if (myZ > closestItem.position.z)
+            {
+                gameObject.GetComponent<Enemy>().moveZ = Random.Range(-1.0f, -0.2f);
+            }
+            else
+            {
+                gameObject.GetComponent<Enemy>().moveZ = Random.Range(0.2f, 1.0f);
+            }
         }
     }
 
     void MoveToEnemy()
     {
         float myX = transform.position.x;
-        if (myX > closestEnemy.position.x)
+        if (CheckIfNeedToMove(myX, closestEnemy.position.x))
         {
-            gameObject.GetComponent<Enemy>().moveX = Random.Range(-2.0f, -1.2f);
-        }
-        else
-        {
-            gameObject.GetComponent<Enemy>().moveX = Random.Range(1.2f, 2.0f);
+            if (myX > closestEnemy.position.x)
+            {
+                gameObject.GetComponent<Enemy>().moveX = Random.Range(-1.0f, -0.2f);
+            }
+            else
+            {
+                gameObject.GetComponent<Enemy>().moveX = Random.Range(0.2f, 1.0f);
+            }
         }
 
         float myZ = transform.position.z;
-        if (myZ > closestEnemy.position.z)
+        if (CheckIfNeedToMove(myZ, closestEnemy.position.z))
         {
-            gameObject.GetComponent<Enemy>().moveZ = Random.Range(-2.0f, -1.2f);
+            if (myZ > closestEnemy.position.z)
+            {
+                gameObject.GetComponent<Enemy>().moveZ = Random.Range(-1.0f, -0.2f);
+            }
+            else
+            {
+                gameObject.GetComponent<Enemy>().moveZ = Random.Range(0.2f, 1.0f);
+            }
+        }
+    }
+
+    bool CheckIfNeedToMove(float myPosition, float itemPosition)
+    {
+        float myPositionPositive = myPosition;
+        float itemPositionPositive = itemPosition;
+
+        if (myPositionPositive < 0)
+        {
+            myPositionPositive = myPositionPositive * -1;
+        }
+        if (itemPositionPositive < 0)
+        {
+            itemPositionPositive = itemPositionPositive * -1;
+        }
+
+        float diference = (myPositionPositive - itemPositionPositive);
+        if(diference<0)
+        {
+            diference = diference * -1;
+        }
+
+
+        if (diference > 1.0f)
+        {
+            return true;
         }
         else
         {
-            gameObject.GetComponent<Enemy>().moveZ = Random.Range(1.2f, 2.0f);
+            return false;
         }
     }
 
@@ -174,8 +226,9 @@ public class EnemyAI : MonoBehaviour
         behaviour = "Looking for Enemy";
     }
 
-    void AttackEnemy() {
-        gameObject.GetComponent<Enemy>().isAttacking = true;
+    void AttackEnemy()
+    {
+        //gameObject.GetComponent<Enemy>().isAttacking = true;
         behaviour = "Attacking";
     }
 

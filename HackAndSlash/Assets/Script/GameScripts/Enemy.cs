@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : PlayersParent
 {
-    public bool isAttacking = true;
+    public bool isAttacking = false;
     public bool isPickingItem = true;
 
     float timerMoveRand = 0;
