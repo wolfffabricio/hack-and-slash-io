@@ -1,8 +1,5 @@
-Anel Simples@Anel@1@0@True@1
-Brinco Simples@Brinco@0@1@True@1
-Coroa Simples@Coroa@1@0@False@1
-Colar Simples@Colar@1@0@True@1
-Broche Simples@Broche@0@1@False@1
-Broche Melhorado@Broche@0@5@False@2
 Coroa de Esmeralda@Coroa@13@0@True@7
 Broche de Diamante@Broche@0@9@True@5
+Anel de Diamante@Anel@8@0@True@5
+Broche de Diamante@Broche@0@9@False@5
+Colar de Prata@Colar@0@3@True@3

@@ -113,7 +113,7 @@ public class Inventory : MonoBehaviour
                 break;
             case 2:
                 jewellType = "Brinco";
-                powerRand = Mathf.RoundToInt(UnityEngine.Random.Range(0.5f, 2.0f) * level);
+                healthRand = Mathf.RoundToInt(UnityEngine.Random.Range(0.5f, 2.0f) * level);
                 break;
             case 3:
                 jewellType = "Coroa";
