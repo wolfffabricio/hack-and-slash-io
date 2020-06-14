@@ -109,7 +109,8 @@ public class User : MonoBehaviour
 
     public void SpendGold(int quantity)
     {
-        SaveGold(gold -= quantity);
+        Gold -= quantity;
+        SaveGold();
     }
 
     public void AddActiveSkill(Skill s)
@@ -136,8 +137,8 @@ public class User : MonoBehaviour
             });
     }
 
-    public void SaveGold(int gold)
+    public void SaveGold()
     {
-        FirebaseDatabase.DefaultInstance.RootReference.Child(USER_KEY).Child(USER_GOLD).SetValueAsync(gold);
+        FirebaseDatabase.DefaultInstance.RootReference.Child(USER_KEY).Child(USER_GOLD).SetValueAsync(Gold);
     }
 }

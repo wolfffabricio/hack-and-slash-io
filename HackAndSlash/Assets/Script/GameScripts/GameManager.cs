@@ -76,7 +76,8 @@ public class GameManager : MonoBehaviour
     {
         int gold = GameObject.Find("User").GetComponent<User>().Gold;
         gold += Mathf.RoundToInt(Time.timeSinceLevelLoad/5);
-        GameObject.Find("User").GetComponent<User>().SaveGold(gold);
+        GameObject.Find("User").GetComponent<User>().Gold = gold;
+        GameObject.Find("User").GetComponent<User>().SaveGold();
 
         SceneManager.LoadScene(0);
     }
