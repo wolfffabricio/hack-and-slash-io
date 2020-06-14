@@ -1,9 +1,17 @@
-﻿using System.Collections;
+﻿using Firebase;
+using Firebase.Database;
+using Firebase.Unity.Editor;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class User : MonoBehaviour
 {
+    private const string USER_KEY = "USER";
+    private const string USER_GOLD = "GOLD";
+
     private int gold;
     private int powerBonus;
     private int healthBonus;
@@ -30,7 +38,7 @@ public class User : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        gold = 10;
+        GetGoldFromDatabase();
         activeSkills = new List<Skill>();
     }
 
@@ -101,12 +109,35 @@ public class User : MonoBehaviour
 
     public void SpendGold(int quantity)
     {
-        gold -= quantity;
+        SaveGold(gold -= quantity);
     }
 
     public void AddActiveSkill(Skill s)
     {
         activeSkills.Add(s);
         s.IsEquiped = true;
+    }
+
+    public void GetGoldFromDatabase()
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("USER/GOLD")
+            .GetValueAsync().ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    // Handle the error...
+                }
+                else if (task.IsCompleted)
+                {
+                    DataSnapshot snapshot = task.Result;
+                    gold = Int16.Parse(snapshot.GetValue(true).ToString());
+                }
+            });
+    }
+
+    public void SaveGold(int gold)
+    {
+        FirebaseDatabase.DefaultInstance.RootReference.Child(USER_KEY).Child(USER_GOLD).SetValueAsync(gold);
     }
 }
