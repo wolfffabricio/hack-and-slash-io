@@ -5,3 +5,4 @@ Colar Simples@Colar@1@0@True@1
 Broche Simples@Broche@0@1@False@1
 Broche Melhorado@Broche@0@5@True@2
 Coroa de Esmeralda@Coroa@13@0@True@7
+Coroa de Diamante@Coroa@4@0@False@5
