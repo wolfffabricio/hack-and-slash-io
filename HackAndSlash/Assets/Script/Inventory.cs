@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Firebase.Database;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -22,7 +23,8 @@ public class Inventory : MonoBehaviour
     {
         user = GameObject.Find("User").GetComponent<User>();
 
-        ReadString();
+        //ReadString();
+        GetInventoryInDatabase();
     }
 
     // Start is called before the first frame update
@@ -159,6 +161,140 @@ public class Inventory : MonoBehaviour
         myJewellery.Add(newJewell);
 
         WriteString();
+        SaveInvetoryInDatabase();
+    }
+
+    public void SaveInvetoryInDatabase()
+    {
+        int count = 1;
+        foreach (Jewellery jewellery in myJewellery)
+        {
+            jewellery.Id = count;
+            jewellery.SaveJewellery();
+            count += 1;
+        }
+    }
+
+    public void GetInventoryInDatabase()
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("JEWELLERY")
+            .GetValueAsync().ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    // Handle the error...
+                }
+                else if (task.IsCompleted)
+                {
+                    DataSnapshot snapshot = task.Result;
+                    long children = snapshot.ChildrenCount;
+
+                    string nameFinal = "";
+                    string typeFinal = "";
+                    int powerFinal = 0;
+                    int healthFinal = 0;
+                    bool isEquippedFinal = false;
+                    int levelFinal = 0;
+
+                    for (int i = 1; i < children; i++)
+                    {
+                        //NAME
+                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/jewellName")
+                            .GetValueAsync().ContinueWith(task2 =>
+                            {
+                                if (task2.IsFaulted)
+                                {
+                                    // Handle the error...
+                                }
+                                else if (task2.IsCompleted)
+                                {
+                                    DataSnapshot snapshot2 = task2.Result;
+                                    nameFinal = snapshot2.Value as String;
+                                }
+                            });
+
+                        //TYPE
+                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/jewellType")
+                                .GetValueAsync().ContinueWith(task3 =>
+                                {
+                                    if (task3.IsFaulted)
+                                    {
+                                        // Handle the error...
+                                    }
+                                    else if (task3.IsCompleted)
+                                    {
+                                        DataSnapshot snapshot3 = task3.Result;
+                                        typeFinal = snapshot3.Value as String;
+                                    }
+                                });
+
+                        //POWER
+                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/powerBonus")
+                                .GetValueAsync().ContinueWith(task4 =>
+                                {
+                                    if (task4.IsFaulted)
+                                    {
+                                        // Handle the error...
+                                    }
+                                    else if (task4.IsCompleted)
+                                    {
+                                        DataSnapshot snapshot4 = task4.Result;
+                                        powerFinal = Convert.ToInt32(snapshot4.Value);
+                                    }
+                                });
+
+                        //HEALTH
+                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/healthBonus")
+                                .GetValueAsync().ContinueWith(task5 =>
+                                {
+                                    if (task5.IsFaulted)
+                                    {
+                                        // Handle the error...
+                                    }
+                                    else if (task5.IsCompleted)
+                                    {
+                                        DataSnapshot snapshot5 = task5.Result;
+                                        powerFinal = Convert.ToInt32(snapshot5.Value);
+                                    }
+                                });
+
+                        //IS EQUIPPED
+                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/isEquiped")
+                                .GetValueAsync().ContinueWith(task6 =>
+                                {
+                                    if (task6.IsFaulted)
+                                    {
+                                        // Handle the error...
+                                    }
+                                    else if (task6.IsCompleted)
+                                    {
+                                        DataSnapshot snapshot6 = task6.Result;
+                                        isEquippedFinal = Convert.ToBoolean(snapshot6.Value);
+                                    }
+                                });
+
+                        //LEVEL
+                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/level")
+                                .GetValueAsync().ContinueWith(task7 =>
+                                {
+                                    if (task7.IsFaulted)
+                                    {
+                                        // Handle the error...
+                                    }
+                                    else if (task7.IsCompleted)
+                                    {
+                                        DataSnapshot snapshot7 = task7.Result;
+                                        levelFinal = Convert.ToInt32(snapshot7.Value);
+                                    }
+                                });
+
+                        //Criação de vdd so aqui
+                        Jewellery jewellery = new Jewellery(nameFinal, typeFinal, powerFinal, healthFinal, isEquippedFinal, levelFinal);
+                        myJewellery.Add(jewellery);
+                    }
+                }
+            });
     }
 
     //chamar ao ganhar um novo equipamento

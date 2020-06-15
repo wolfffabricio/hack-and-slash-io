@@ -168,6 +168,8 @@ public class InventoryUI : MonoBehaviour
 
         UpdateEquippedJewellTexts();
         inventory.WriteString();
+        inventory.SaveInvetoryInDatabase();
+        inventory.GetInventoryInDatabase();
     }
 
     public void UnequipButton()
@@ -177,6 +179,7 @@ public class InventoryUI : MonoBehaviour
 
         UpdateEquippedJewellTexts();
         inventory.WriteString();
+        inventory.SaveInvetoryInDatabase();
     }
 
     public void BuyButton()

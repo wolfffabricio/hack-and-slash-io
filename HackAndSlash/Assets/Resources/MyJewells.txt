@@ -3,3 +3,15 @@ Broche de Diamante@Broche@0@9@True@5
 Anel de Diamante@Anel@8@0@True@5
 Broche de Diamante@Broche@0@9@False@5
 Colar de Prata@Colar@0@3@True@3
+Anel Simples@Anel@2@0@False@1
+Coroa Melhorado@Coroa@4@0@False@2
+Anel Melhorado@Anel@3@0@False@2
+Anel de Diamante Negro@Anel@4@0@False@6
+Anel de Ouro@Anel@7@0@False@4
+Anel de Prata@Anel@5@0@False@3
+Colar de Esmeralda@Colar@0@12@False@7
+Coroa Melhorado@Coroa@1@0@False@2
+Anel de Ouro@Anel@5@0@False@4
+Anel Melhorado@Anel@2@0@False@2
+Coroa de Ouro@Coroa@4@0@False@4
+Anel de Diamante@Anel@6@0@False@5
