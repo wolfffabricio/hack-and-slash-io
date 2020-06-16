@@ -45,7 +45,6 @@ public class InventoryUI : MonoBehaviour
         user = GameObject.Find("User").GetComponent<User>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
-
         gridLayoutContent = GameObject.Find("GridLayoutContent");
         prefabImg = Resources.Load("Jewellery") as GameObject;
 
@@ -89,7 +88,6 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         PopulateGrid(inventory.MyJewellery);
-
         UpdateEquippedJewellTexts();
         UpdateMoneyText();
     }
@@ -134,7 +132,9 @@ public class InventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        PopulateGrid(inventory.MyJewellery);
+        UpdateEquippedJewellTexts();
+        UpdateMoneyText();
     }
 
     public void ShowEquipOrUnequipButton(ref Jewellery j)
@@ -169,7 +169,6 @@ public class InventoryUI : MonoBehaviour
         UpdateEquippedJewellTexts();
         inventory.WriteString();
         inventory.SaveInvetoryInDatabase();
-        inventory.GetInventoryInDatabase();
     }
 
     public void UnequipButton()

@@ -22,8 +22,6 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         user = GameObject.Find("User").GetComponent<User>();
-
-        //ReadString();
         GetInventoryInDatabase();
     }
 
@@ -36,7 +34,7 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+      
     }
     private void ReturnAllPowerBonus()
     {
@@ -177,124 +175,39 @@ public class Inventory : MonoBehaviour
 
     public void GetInventoryInDatabase()
     {
-        FirebaseDatabase.DefaultInstance
-            .GetReference("JEWELLERY")
-            .GetValueAsync().ContinueWith(task =>
+        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY").ChildAdded += HandleChildAdded;
+
+        void HandleChildAdded(object sender, ChildChangedEventArgs args)
+        {
+            if (args.DatabaseError != null)
             {
-                if (task.IsFaulted)
-                {
-                    // Handle the error...
-                }
-                else if (task.IsCompleted)
-                {
-                    DataSnapshot snapshot = task.Result;
-                    long children = snapshot.ChildrenCount;
+                Debug.LogError(args.DatabaseError.Message);
+                return;
+            }
 
-                    string nameFinal = "";
-                    string typeFinal = "";
-                    int powerFinal = 0;
-                    int healthFinal = 0;
-                    bool isEquippedFinal = false;
-                    int levelFinal = 0;
+            Dictionary<string, object> inventory = new Dictionary<string, object>();
+            foreach (KeyValuePair<string, object> kvp1 in args.Snapshot.Value as Dictionary<string, object>)
+            {
+                inventory.Add(kvp1.Key, kvp1.Value);
+            }
 
-                    for (int i = 1; i < children; i++)
-                    {
-                        //NAME
-                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/jewellName")
-                            .GetValueAsync().ContinueWith(task2 =>
-                            {
-                                if (task2.IsFaulted)
-                                {
-                                    // Handle the error...
-                                }
-                                else if (task2.IsCompleted)
-                                {
-                                    DataSnapshot snapshot2 = task2.Result;
-                                    nameFinal = snapshot2.Value as String;
-                                }
-                            });
+            string nameFinal = inventory["jewellName"] as String;
+            string typeFinal = inventory["jewellType"] as String;
+            int powerFinal = Convert.ToInt32(inventory["powerBonus"]);
+            int healthFinal = Convert.ToInt32(inventory["healthBonus"]);
+            bool isEquippedFinal = Convert.ToBoolean(inventory["isEquiped"]);
+            int levelFinal = Convert.ToInt32(inventory["level"]);
 
-                        //TYPE
-                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/jewellType")
-                                .GetValueAsync().ContinueWith(task3 =>
-                                {
-                                    if (task3.IsFaulted)
-                                    {
-                                        // Handle the error...
-                                    }
-                                    else if (task3.IsCompleted)
-                                    {
-                                        DataSnapshot snapshot3 = task3.Result;
-                                        typeFinal = snapshot3.Value as String;
-                                    }
-                                });
+            Jewellery jewellery = new Jewellery(nameFinal, typeFinal, powerFinal, healthFinal, isEquippedFinal, levelFinal);
+            myJewellery.Add(jewellery);
 
-                        //POWER
-                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/powerBonus")
-                                .GetValueAsync().ContinueWith(task4 =>
-                                {
-                                    if (task4.IsFaulted)
-                                    {
-                                        // Handle the error...
-                                    }
-                                    else if (task4.IsCompleted)
-                                    {
-                                        DataSnapshot snapshot4 = task4.Result;
-                                        powerFinal = Convert.ToInt32(snapshot4.Value);
-                                    }
-                                });
-
-                        //HEALTH
-                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/healthBonus")
-                                .GetValueAsync().ContinueWith(task5 =>
-                                {
-                                    if (task5.IsFaulted)
-                                    {
-                                        // Handle the error...
-                                    }
-                                    else if (task5.IsCompleted)
-                                    {
-                                        DataSnapshot snapshot5 = task5.Result;
-                                        powerFinal = Convert.ToInt32(snapshot5.Value);
-                                    }
-                                });
-
-                        //IS EQUIPPED
-                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/isEquiped")
-                                .GetValueAsync().ContinueWith(task6 =>
-                                {
-                                    if (task6.IsFaulted)
-                                    {
-                                        // Handle the error...
-                                    }
-                                    else if (task6.IsCompleted)
-                                    {
-                                        DataSnapshot snapshot6 = task6.Result;
-                                        isEquippedFinal = Convert.ToBoolean(snapshot6.Value);
-                                    }
-                                });
-
-                        //LEVEL
-                        FirebaseDatabase.DefaultInstance.GetReference("JEWELLERY/JEWELL_" + i + "/level")
-                                .GetValueAsync().ContinueWith(task7 =>
-                                {
-                                    if (task7.IsFaulted)
-                                    {
-                                        // Handle the error...
-                                    }
-                                    else if (task7.IsCompleted)
-                                    {
-                                        DataSnapshot snapshot7 = task7.Result;
-                                        levelFinal = Convert.ToInt32(snapshot7.Value);
-                                    }
-                                });
-
-                        //Criação de vdd so aqui
-                        Jewellery jewellery = new Jewellery(nameFinal, typeFinal, powerFinal, healthFinal, isEquippedFinal, levelFinal);
-                        myJewellery.Add(jewellery);
-                    }
-                }
-            });
+            if (jewellery.IsEquiped)
+            {
+                EquipJewell(jewellery);
+            }
+        }
+        ReturnAllPowerBonus();
+        ReturnAllHealthBonus();
     }
 
     //chamar ao ganhar um novo equipamento
