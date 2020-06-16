@@ -87,7 +87,7 @@ public class InventoryUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PopulateGrid(inventory.MyJewellery);
+        //PopulateGrid(inventory.MyJewellery);
         UpdateEquippedJewellTexts();
         UpdateMoneyText();
     }
@@ -132,9 +132,14 @@ public class InventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PopulateGrid(inventory.MyJewellery);
+        //PopulateGrid(inventory.MyJewellery);
         UpdateEquippedJewellTexts();
         UpdateMoneyText();
+    }
+
+    public void UpdateGrid()
+    {
+        PopulateGrid(inventory.MyJewellery);
     }
 
     public void ShowEquipOrUnequipButton(ref Jewellery j)

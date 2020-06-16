@@ -22,7 +22,9 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         user = GameObject.Find("User").GetComponent<User>();
+        //ReadString();
         GetInventoryInDatabase();
+
     }
 
     // Start is called before the first frame update
@@ -200,7 +202,7 @@ public class Inventory : MonoBehaviour
 
             Jewellery jewellery = new Jewellery(nameFinal, typeFinal, powerFinal, healthFinal, isEquippedFinal, levelFinal);
             myJewellery.Add(jewellery);
-
+            GameObject.Find("InventoryUI").GetComponent<InventoryUI>().UpdateGrid();
             if (jewellery.IsEquiped)
             {
                 EquipJewell(jewellery);

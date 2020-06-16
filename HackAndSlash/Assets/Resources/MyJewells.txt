@@ -1,21 +1,26 @@
-Broche de Diamante@Broche@0@7@False@5
-Coroa Melhorado@Coroa@2@0@False@2
-Broche de Diamante@Broche@0@6@False@5
-Brinco de Ouro@Brinco@0@3@False@4
-Coroa de Ouro@Coroa@4@0@False@4
-Anel de Ouro@Anel@8@0@False@4
-Coroa de Diamante@Coroa@9@0@False@5
-Broche Simples@Broche@0@1@False@1
+Broche de Diamante@Broche@0@7@True@5
 Colar de Ouro@Colar@0@4@False@4
-Broche de Ouro@Broche@0@7@False@4
 Coroa Melhorado@Coroa@2@0@False@2
+Broche de Prata@Broche@0@4@False@3
 Colar Melhorado@Colar@0@3@False@2
 Anel Simples@Anel@2@0@False@1
-Broche de Prata@Broche@0@4@False@3
 Colar de Ouro@Colar@0@7@False@4
+Colar de Ouro@Colar@0@8@False@4
 Colar Melhorado@Colar@0@4@False@2
 Coroa de Esmeralda@Coroa@6@0@False@7
-Colar de Ouro@Colar@0@8@False@4
-Broche de Prata@Broche@0@4@False@3
+Brinco Simples@Brinco@0@1@False@1
 Anel de Prata@Anel@2@0@False@3
+Broche de Prata@Broche@0@4@False@3
+Coroa Melhorado@Coroa@2@0@False@2
 Colar de Diamante@Colar@0@7@False@5
+Anel de Ouro@Anel@8@0@False@4
+Broche de Diamante@Broche@0@6@False@5
+Brinco de Ouro@Brinco@0@3@False@4
+Coroa de Diamante@Coroa@9@0@True@5
+Broche de Ouro@Broche@0@7@False@4
+Broche Simples@Broche@0@1@False@1
+Brinco de Esmeralda@Brinco@0@13@False@7
+Colar de Esmeralda@Colar@0@8@False@7
+Colar de Prata@Colar@0@4@False@3
+Brinco Melhorado@Brinco@0@2@False@2
+Colar de Ouro@Colar@0@6@True@4
